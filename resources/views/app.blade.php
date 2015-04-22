@@ -49,9 +49,6 @@
                                 <li>
                                     <a class="btn btn-default btn-outline btn-circle collapsed"  data-toggle="collapse" href="#nav-collapse1" aria-expanded="false" aria-controls="nav-collapse1">Categories</a>
                                 </li>
-                                <!--li>
-                                    <a class="btn btn-default btn-outline btn-circle collapsed"  data-toggle="collapse" href="#nav-collapse2" aria-expanded="false" aria-controls="nav-collapse2">Login</a>
-                                </li-->
                             @else
                                 <li><a href="{{ url('/auth/logout') }}">Logout</a></li>
                                 <li>
@@ -65,27 +62,12 @@
                             <li><a href="/categories/notes">Notes</a></li>
                         </ul>
                         @if (Auth::guest())
-                            <div class="collapse nav navbar-nav nav-collapse" id="nav-collapse2">
-                                <!--form class="navbar-form navbar-right form-inline" role="form" method="POST" action="{{ url('/auth/login') }}">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <div class="form-group">
-                                    <label class="sr-only" for="email">Email</label>
-                                    <input type="email" class="form-control" name="email" id="email" placeholder="Email" autofocus required value="{{ old('email') }}"/>
-                                </div>
-                                <div class="form-group">
-                                    <label class="sr-only" for="password">Password</label>
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required />
-                                </div>
-                                <button type="submit" class="btn btn-primary">Login</button>
-                            </form-->
-                            </div>
+
                         @else
                             <ul class="collapse nav navbar-nav nav-collapse" id="nav-collapse3">
                                 <li><a href="{{ url('/api/content/create') }}">Create Content</a></li>
                             </ul>
                         @endif
-
-
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container -->
             </nav><!-- /.navbar -->
@@ -98,7 +80,6 @@
 
 			<div id="body-top">
                 @yield('body_top')
-
 			</div>
 			<div id="body-primary" class="page-col">
 				<div id="primary-content">
@@ -130,7 +111,6 @@
                             <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                             <div class="clear"></div>
                         </form>
-
                     </div>
                     <div class="module social">
                         <h4>Social Links</h4>
@@ -182,7 +162,6 @@
     <!-- Scripts -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
-
     @yield('footer_scripts')
 </body>
 </html>
