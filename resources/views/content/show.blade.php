@@ -1,6 +1,7 @@
 @extends('app')
 
 @section('title'){{$item->title}}@endsection
+@section('description'){{$item->excerpt}}@endsection
 
 @section('content')
     <div class="article">
@@ -23,14 +24,12 @@
                 </div>
                 <div class="module comments">
                     <div id="disqus_thread"></div>
-
                     <script type="text/javascript">
                         /* * * CONFIGURATION VARIABLES * * */
                         var disqus_shortname = 'creativewizardry';
                         var disqus_identifier = '{{$item->slug}}';
                         var disqus_title = '{{$item->title}}';
                         var disqus_url = '{{URL::current()}}';
-
                         /* * * DON'T EDIT BELOW THIS LINE * * */
                         (function() {
                             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -45,7 +44,6 @@
     </div><!-- end .article -->   
 @endsection
 @section('footer_scripts')
-    <!-- Prism syntax higlighting -->
     <script type="text/javascript" src="{{ asset('/js/prism/prism.js') }}"></script>
 @endsection
 

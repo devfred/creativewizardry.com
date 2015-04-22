@@ -4,12 +4,11 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-
 	<title>@yield('title', 'Notes/Thoughts/Research') | Creative Wizardry</title>
-	<meta property="og:title" content="Creative Wizardry - Notes/Thoughts/Research" />
+	<meta property="og:title" content="@yield('title', 'Notes/Thoughts/Research') | Creative Wizardry" />
     <meta property="og:site_name" content="http://creativewizardry.com"/>
-    <meta property="og:url" content="URL::current()"/>
-    <meta property="og:description" content="Creative Wizardry - Notes/Thoughts/Research"/>
+    <meta property="og:url" content="{{URL::current()}}"/>
+    <meta property="og:description" content="@yield('description', 'Notes/Thoughts/Research | CreativeWizardry')"/>
 	<!-- Stylesheets -->
 	<link href="{{ asset('/css/app.css') }}" rel="stylesheet"/>
     <!-- Fonts -->

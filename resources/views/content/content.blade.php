@@ -22,6 +22,5 @@
     {!! $contentItems->render() !!}
 @endsection
 @section('footer_scripts')
-    <!-- Prism syntax higlighting -->
     <script type="text/javascript" src="{{ asset('/js/prism/prism.js') }}"></script>
 @endsection
