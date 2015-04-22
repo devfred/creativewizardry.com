@@ -9,6 +9,7 @@
     <meta property="og:site_name" content="http://creativewizardry.com"/>
     <meta property="og:url" content="{{URL::current()}}"/>
     <meta property="og:description" content="@yield('description', 'Notes/Thoughts/Research | CreativeWizardry')"/>
+    <link rel="search" href="{{ asset('opensearchdescription.xml') }}" type="application/opensearchdescription+xml" title="Search Creative Wizardry" />
 	<!-- Stylesheets -->
 	<link href="{{ asset('/css/app.css') }}" rel="stylesheet"/>
     <!-- Fonts -->
