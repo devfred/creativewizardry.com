@@ -15,10 +15,16 @@ class CreateContentItemsTable extends Migration {
 		Schema::create('content_items', function(Blueprint $table)
 		{
 			$table->increments('id');
-            $table->integer('user_id');
             $table->string('title');
+            $table->text('excerpt');
             $table->text('content');
+            $table->string('slug')->nullable();
 			$table->timestamps();
+            $table->integer('user_id')->unsigned();
+            $table->integer('category_id')->unsigned();
+
+
+
 		});
 	}
 
