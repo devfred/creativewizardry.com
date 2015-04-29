@@ -47,7 +47,7 @@
                             <li><a href="{{ url('/contact') }}">Contact</a></li>
                             @if (Auth::guest())
                                 <li>
-                                    <a class="btn btn-default btn-outline btn-circle collapsed"  data-toggle="collapse" href="#nav-collapse1" aria-expanded="false" aria-controls="nav-collapse1">Categories</a>
+                                    <a class="btn btn-default btn-outline btn-circle collapsed"  data-toggle="collapse" href="#nav-collapse1" aria-expanded="false" aria-controls="nav-collapse1">Search</a>
                                 </li>
                             @else
                                 <li><a href="{{ url('/auth/logout') }}">Logout</a></li>
@@ -56,11 +56,17 @@
                                 </li>
                             @endif
                         </ul>
-                        <ul class="collapse nav navbar-nav nav-collapse" id="nav-collapse1">
-                            <li><a href="/categories/research">Research</a></li>
-                            <li><a href="/categories/quick-tips">Quick Tips</a></li>
-                            <li><a href="/categories/notes">Notes</a></li>
-                        </ul>
+
+                        <div class="collapse nav-collapse"  id="nav-collapse1">
+                            <form class="navbar-form navbar-right form-inline" role="form" method="POST" action="{{ url('/search') }}">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">                                                            
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="term" id="term"/>
+                                </div>                                
+                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+
                         @if (Auth::guest())
 
                         @else
@@ -103,15 +109,6 @@
 			<div id="body-secondary" class="page-col">
 				<div id="secondary-content">
 					@yield('secondary')
-                    <div class="module search">
-                        <form  class="form" role="form" method="POST" action="{{ url('/search') }}">
-                            <h4>Search</h4>
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <input type="text" class="form-control" name="term" id="term"/>
-                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                            <div class="clear"></div>
-                        </form>
-                    </div>
                     <div class="module social">
                         <h4>Social Links</h4>
                         <a href="https://www.facebook.com/frederick.king.96" target="_blank" class="strike-tooltip fb" title="Visit Facebook"><i class="fa fa-facebook"></i></a>
