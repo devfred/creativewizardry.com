@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class ContentController extends Controller {
 
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -19,8 +20,10 @@ class ContentController extends Controller {
 	 */
 	public function index()
 	{
+		$view = ($this->isAdminRequest()) ? 'admin.content' : 'content.content';		
         $contentItems = ContentItem::paginate(5);
-		return view('content.content', compact('contentItems') );
+
+		return view( $view, compact('contentItems') );
 	}
 
 	/**
@@ -32,8 +35,7 @@ class ContentController extends Controller {
 	{
         if (!Auth::check())
         {
-            return Redirect::to("/");
-
+            return Redirect::to('/auth/login')->with('message', 'Action requires login');
         }
         return view('content.create');
 
@@ -49,15 +51,9 @@ class ContentController extends Controller {
         $title = $request->get('title');
         $slug = str_slug( $title );
         $item = ContentItem::create(['title' => $title, 'slug'=>$slug,'excerpt'=> $request->get('excerpt'), 'content'=> $request->get('content'), 'user_id'=>1, 'category_id'=>$request->get('category_id') ]);
-        $tags = explode(',',$request->get('tag_list'));
-        $content_tags = array();
-        //Get content tags from form
-        foreach($tags as $tag){
-            array_push($content_tags, array('content_item_id' => $item->id, 'tag_id'=>$tag));
-        }
-
-        DB::table('content_item_tag')->insert($content_tags);
-        return \Redirect::to('/api/content/create')->with('message', 'Content Item created');
+        $tags = explode(',',$request->get('tag_list'));        
+		$item->tags()->sync($tags);	       
+        return \Redirect::to('/admin/content')->with('message', 'Content Item created');
 	}
 
 	/**
@@ -78,9 +74,15 @@ class ContentController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit($slug)
 	{
 		//
+		if (!Auth::check())
+        {
+            return Redirect::to('/auth/login')->with('message', 'Action requires login');
+        }
+        $item = ContentItem::findBySlug($slug);       
+		return view('content.edit', compact('item') );
 	}
 
 	/**
@@ -89,9 +91,22 @@ class ContentController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($slug)
 	{
-		//
+		if (!Auth::check())
+        {
+            return Redirect::to('/auth/login')->with('message', 'Action requires login');
+        }
+        $item = ContentItem::findBySlug($slug);
+        $item->title = \Input::get('title');	
+        $item->slug = str_slug( \Input::get('title') );
+        $item->excerpt = \Input::get('excerpt'); 
+        $item->content = \Input::get('content');
+        $item->category_id = \Input::get('category_id');
+		$item->save();
+		$tags = explode(',',\Input::get('tag_list'));
+		$item->tags()->sync($tags);		        
+        return \Redirect::to('/admin/content')->with('message', 'Item Updated');
 	}
 
 	/**
@@ -100,9 +115,15 @@ class ContentController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy($slug)
 	{
-		//
+		if (!Auth::check())
+        {
+            return Redirect::to('/auth/login')->with('message', 'Action requires login');
+        }
+        $item = ContentItem::findBySlug($slug);
+        $item->delete();
+        return \Redirect::to('/admin/content')->with('message', 'Item Deleted');
 	}
 
 }

@@ -1,32 +1,36 @@
 @extends('admin')
 @section('content')
-    <p><a href="{{ url('/admin') }}">Admin Dashboard</a></p>
-    <h2 class="page-title">Create Content</h2>
+    <h2 class="page-title">Edit Content</h2>
 
-    <h3>Create Content Item</h3>
-	<form class="form-horizontal" role="form" method="POST" action="{{ url('/admin/content') }}">
+    <h3>Edit Content Item</h3>
+	<form class="form-horizontal" role="form" method="POST" action="{{url('/admin/content/' . $item->slug ) }}">
+        <input type="hidden" name="_method" value="PUT">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 		<div class="form-group">
 			<label class="col-md-4 control-label">Title</label>
 			<div class="col-md-6">
-				<input type="text" class="form-control" name="title" value="{{ old('title') }}">
+				<input type="text" class="form-control" name="title" value="{{ $item->title }}">
 			</div>
 		</div>
 
 		<div class="form-group">
 			<label class="col-md-4 control-label">Slug</label>
 			<div class="col-md-6">
-				<input type="text" class="form-control" name="slug" value="{{ old('slug') }}">
+				<input type="text" class="form-control" name="slug" value="{{ $item->slug }}">
 			</div>
 		</div>
 
 		<div class="form-group">
 			<label class="col-md-4 control-label">Category</label>
 			<div class="col-md-6">
-                <select class="form-control" name="category_id" value="{{ old('category_id') }}">
+                <select class="form-control" name="category_id">
                 @foreach(DB::table('categories')->get() as $category)
+                    @if( $item->category_id == $category->id )
+                    <option value="{{$category->id}}" selected="selected">{{$category->name}}</option>
+                    @else
                     <option value="{{$category->id}}">{{$category->name}}</option>
+                    @endif                   
                 @endforeach
                 </select>
 			</div>
@@ -35,28 +39,27 @@
 		<div class="form-group">
 			<label class="col-md-4 control-label">Tags</label>
 			<div class="col-md-6">
-				<input type="text" class="form-control" name="tag_list" value="{{ old('tag_list') }}">
+				<input type="text" class="form-control" name="tag_list" value="{{ implode(",", $item->tag_list) }}">
                 @foreach(DB::table('tags')->get() as $tag)
                     <span class="tag form-tag" data-id="{{$tag->id}}"><a class="label label-default">{{$tag->name}}</a> </span>
                 @endforeach
-
 			</div>
 		</div>
         <div class="form-group">
             <label class="col-md-4 control-label">Excerpt</label>
             <div class="col-md-6">
-                <textarea class="form-control" name="excerpt">{{ old('excerpt') }}</textarea>
+                <textarea class="form-control" name="excerpt">{{ $item->excerpt }}</textarea>
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-4 control-label">Content</label>
             <div class="col-md-6">
-                <textarea class="form-control" name="content">{{ old('content') }}</textarea>
+                <textarea class="form-control" name="content">{{ $item->content }}</textarea>
             </div>
         </div>
 		<div class="form-group">
 			<div class="col-md-6 col-md-offset-4">
-				<button type="submit" class="btn btn-primary">Create</button>
+				<button type="submit" class="btn btn-primary">Update</button>
 			</div>							
 		</div>
 	</form>
