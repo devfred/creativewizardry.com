@@ -30,8 +30,8 @@ class AboutController extends Controller {
     			'user_message' => $request->get('message') ), 
         	function($message)
 	    	{
-	        	$message->from('devfred@creativewizardry.com');
-	        	$message->to('mcdevfred@gmail.com', 'Admin')->subject('Creative Wizardry Contact Form');
+	        	$message->from(env('ADMIN_EMAIL'));
+	        	$message->to(env('ADMIN_EMAIL'), 'Admin')->subject('Creative Wizardry Contact Form');
 	    	}
 	    );
 

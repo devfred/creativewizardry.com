@@ -11,8 +11,8 @@ class NewsletterController extends Controller {
      */
 	public function signup(NewsletterFormRequest $request)
     {
-        $API_KEY = '5ddc0254935fd11a2479477bbb2162f1-us10';
-        $LIST_ID = '5b8220a723';
+        $API_KEY = env('MAILCHIMP_KEY');
+        $LIST_ID = env('MAILCHIMP_LIST_ID');
         $mc = new \Mailchimp( $API_KEY );
         $name = $request->get('name');
         $email = $request->get('email');
