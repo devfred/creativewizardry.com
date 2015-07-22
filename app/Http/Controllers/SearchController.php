@@ -18,7 +18,7 @@ class SearchController extends Controller {
 
         if($contentItems->count() > 0)
         {
-            //Session::flash('message', "Search: $search");
+            Session::flash('message', "Search: $search");
         }else{
             Session::flash('message', "No results for $search");
         }
