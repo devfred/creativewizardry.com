@@ -3,6 +3,6 @@
 	 <ShortName>CreativeWizardry Search</ShortName>
 	 <Description>Search CreativeWizardry</Description>
 	 <Tags>Creative Wizardry</Tags>
-	 <SearchForm>http://dev.creativewizardry.com/</SearchForm>
-	 <Url type="text/html" template="http://dev.creativewizardry.com/search/{searchTerms}"/>
+	 <SearchForm>http://creativewizardry.com/</SearchForm>
+	 <Url type="text/html" template="http://creativewizardry.com/search/{searchTerms}"/>
 </OpenSearchDescription>
