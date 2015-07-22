@@ -8,4 +8,9 @@ abstract class Controller extends BaseController {
 
 	use DispatchesCommands, ValidatesRequests;
 
+	public function isAdminRequest()
+    {    	
+        return (\Route::getCurrentRoute()->getPrefix() == '/admin');
+    }
+
 }
