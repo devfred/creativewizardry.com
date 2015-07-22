@@ -37,7 +37,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">                                           </a>
+                        <a class="navbar-brand" href="#"></a>
                     </div>
 
                     <div class="collapse navbar-collapse" id="navbar-collapse-1">
@@ -71,7 +71,7 @@
 
                         @else
                             <ul class="collapse nav navbar-nav nav-collapse" id="nav-collapse3">
-                                <li><a href="{{ url('/api/content/create') }}">Create Content</a></li>
+                                <li><a href="{{ url('/admin') }}">Admin Dashboard</a></li>
                             </ul>
                         @endif
                     </div><!-- /.navbar-collapse -->
