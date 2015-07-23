@@ -1,5 +1,5 @@
 <?php namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use App\Category;
 use App\ContentItem;
 use App\Http\Requests;
@@ -17,7 +17,10 @@ class CategoriesController extends Controller {
 	 */
 	public function index()
 	{
-		//
+		$view = ($this->isAdminRequest()) ? 'admin.categories' : 'categories.content';		
+        $contentItems = Category::paginate(5);
+
+		return view( $view, compact('contentItems') );
 	}
 
 	/**
@@ -27,7 +30,11 @@ class CategoriesController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		if (!Auth::check())
+        {
+            return Redirect::to('/auth/login')->with('message', 'Action requires login');
+        }
+        return view('categories.create');
 	}
 
     /**
@@ -39,7 +46,7 @@ class CategoriesController extends Controller {
 	public function store(CategoryRequest $request)
 	{
         Category::create(['name' => $request->get('name'), 'slug'=>$request->get('slug')]);
-        return \Redirect::to('/api/content/create')->with('message', 'Category created');
+        return \Redirect::to('/admin/categories')->with('message', 'Category created');
 	}
 
 	/**
@@ -66,7 +73,12 @@ class CategoriesController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		if (!Auth::check())
+        {
+            return Redirect::to('/auth/login')->with('message', 'Action requires login');
+        }
+        $item = Category::find($id);     
+		return view('categories.edit', compact('item') );
 	}
 
 	/**
@@ -77,7 +89,15 @@ class CategoriesController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+		if (!Auth::check())
+        {
+            return Redirect::to('/auth/login')->with('message', 'Action requires login');
+        }
+        $item = Category::find($id);
+        $item->name = \Input::get('name');	
+        $item->slug = str_slug( \Input::get('name') );        
+		$item->save();		
+        return \Redirect::to('/admin/categories')->with('message', 'Item Updated');
 	}
 
 	/**
@@ -88,7 +108,14 @@ class CategoriesController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		if (!Auth::check())
+        {
+            return Redirect::to('/auth/login')->with('message', 'Action requires login');
+        }
+        $item = Category::find($id);
+        $item->delete();
+        ContentItem::where('category_id', '=', $id)->delete();
+        return \Redirect::to('/admin/categories')->with('message', 'Item Deleted');
 	}
 
 }
