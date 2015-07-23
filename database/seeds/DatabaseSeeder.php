@@ -20,8 +20,12 @@ class DatabaseSeeder extends Seeder {
 		Model::unguard();
         $this->call('UserTableSeeder');
         $this->call('CategoryTableSeeder');
-        $this->call('TagTableSeeder');
-        $this->call('ContentTableSeeder');
+        if(getenv('APP_ENV') != "production")
+        {
+            $this->call('TagTableSeeder');
+            $this->call('ContentTableSeeder');
+        }
+        
 	}
 
 }
