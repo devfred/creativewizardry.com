@@ -19,7 +19,14 @@ class ContentItem extends Model {
      *
      * @var array
      */
-    protected $fillable = ['title', 'content', 'excerpt', 'slug', 'user_id', 'category_id', 'created_at'];
+    protected $fillable = ['title', 'content', 'excerpt', 'slug', 'user_id', 'category_id', 'created_at','published_at','is_published'];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['created_at', 'updated_at', 'published_at'];
 
     /**
      * Return User associated with ContentItem

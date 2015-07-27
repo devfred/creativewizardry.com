@@ -83,7 +83,16 @@ class ContentTableSeeder extends Seeder
         {
             $title = $faker->sentence;
             $slug = strtolower( str_replace(".", "", str_replace(" ", "-", $title) ) );
-            $item = ContentItem::create(['title' => $title, 'slug'=>$slug,'excerpt'=>join('<br/><br/>',$faker->paragraphs(2)), 'content'=>join( '<br/><br/>', $faker->paragraphs(5) ), 'user_id'=>$user->id, 'category_id'=>rand(1,$catCount) ]);
+            $item = ContentItem::create([
+                'title' => $title, 
+                'slug'=>$slug,
+                'excerpt'=>join('<br/><br/>',$faker->paragraphs(2)), 
+                'content'=>join( '<br/><br/>', $faker->paragraphs(5) ), 
+                'user_id'=>$user->id, 
+                'category_id'=>rand(1,$catCount),
+                'is_published' => rand(0,1),
+                'published_at' => $faker->dateTime($max = '2015-08-15 00:00:00')  
+            ]);
             $content_tags = array(
                 array('content_item_id' => $item->id, 'tag_id'=>rand(1,$tagCount)),
                 array('content_item_id' => $item->id, 'tag_id'=>rand(1,$tagCount)),

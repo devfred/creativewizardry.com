@@ -22,9 +22,8 @@ class CreateContentItemsTable extends Migration {
 			$table->timestamps();
             $table->integer('user_id')->unsigned();
             $table->integer('category_id')->unsigned();
-
-
-
+            $table->boolean('is_published')->default(false);
+            $table->timestamp('published_at');
 		});
 	}
 

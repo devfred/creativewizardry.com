@@ -11,7 +11,7 @@
                     @foreach($item->tags as $tag)
                         <span class="tag "><a class="label label-default" href="{{ url("/tags/" . $tag->slug) }}">{{$tag->name}}</a> </span>
                     @endforeach
-                    <span class="time"><i class="fa fa-calendar"></i> <time>{{ date("F d, Y",strtotime($item->created_at)) }}</time></span>
+                    <span class="time"><i class="fa fa-calendar"></i> <time>{{ date("F d, Y",strtotime($item->published_at)) }}</time></span>
                 </p>
 		        <p>{!! $item->excerpt !!}</p>
 		        <a href="{{ url( '/'. $item->slug ) }}">Read More</a>

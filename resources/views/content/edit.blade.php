@@ -52,6 +52,24 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="col-md-4 control-label">Publish Date</label>
+            <div class="col-md-6">
+                <input class="form-control" name="published_at" value="{{ $item->published_at }}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-4 control-label">Is Published</label>
+            <div class="col-md-6">            
+                @if( $item->is_published )
+                <input type="checkbox" name="is_published" checked="checked">
+                @else
+                <input type="checkbox" name="is_published">
+                @endif                   
+            </div>
+        </div>
+
+        <div class="form-group">
             <label class="col-md-4 control-label">Content</label>
             <div class="col-md-6">
                 <textarea class="form-control" name="content">{{ $item->content }}</textarea>

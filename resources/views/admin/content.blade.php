@@ -26,9 +26,9 @@
                                     <th></th>
                                     <th>ID</th>
                                     <th>Title</th>
-                                    <th>Slug</th>
-                                    <th>Excerpt</th>
                                     <th>Category</th>
+                                    <th>Is Published</th>
+                                    <th>Publish Date</th>
                                 </tr>
                             </thead>                            
                             @foreach($contentItems as $item)
@@ -42,10 +42,10 @@
                                     <a class="btn btn-small btn-success" href="{{ URL::to('/' . $item->slug) }}" target="blank">View</a>                                    
                                     <a class="btn btn-small btn-info" href="{{ URL::to('/admin/content/' . $item->slug) . '/edit' }}">Edit</a></td>
                                 <td>{{$item->id}}</td>
-                                <td>{{$item->title}}</td>
-                                <td>{{$item->slug}}</td>
-                                <td>{{$item->excerpt}}</td>
+                                <td>{{$item->title}}</td>                                
                                 <td>{{$item->category->slug}}</td>
+                                <td>{{$item->is_published}}</td>
+                                <td>{{$item->published_at}}</td>
                             </tr>
                             @endforeach                        
                         </table>

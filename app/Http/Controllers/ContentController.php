@@ -21,8 +21,12 @@ class ContentController extends Controller {
 	public function index()
 	{
 		$view = ($this->isAdminRequest()) ? 'admin.content' : 'content.content';		
-        $contentItems = ContentItem::paginate(5);
-
+        
+        if( $this->isAdminRequest() ){
+        	$contentItems = ContentItem::orderBy('published_at', 'DESC')->paginate(5);
+        }else{
+        	$contentItems = ContentItem::where('is_published', true)->orderBy('published_at', 'DESC')->paginate(5);
+        }
 		return view( $view, compact('contentItems') );
 	}
 
@@ -50,7 +54,16 @@ class ContentController extends Controller {
 	{
         $title = $request->get('title');
         $slug = str_slug( $title );
-        $item = ContentItem::create(['title' => $title, 'slug'=>$slug,'excerpt'=> $request->get('excerpt'), 'content'=> $request->get('content'), 'user_id'=>1, 'category_id'=>$request->get('category_id') ]);
+        $item = ContentItem::create([
+        	'title' => $title, 
+        	'slug'=>$slug,
+        	'excerpt'=> $request->get('excerpt'), 
+        	'content'=> $request->get('content'), 
+        	'user_id'=>1, 
+        	'category_id'=>$request->get('category_id'),
+        	'published_at'=>$request->get('published_at'),
+        	'is_published'=>\Input::get('is_published') ? 1 :0 
+        ]);
         $tags = explode(',',$request->get('tag_list'));        
 		$item->tags()->sync($tags);	       
         return \Redirect::to('/admin/content')->with('message', 'Content Item created');
@@ -103,6 +116,8 @@ class ContentController extends Controller {
         $item->excerpt = \Input::get('excerpt'); 
         $item->content = \Input::get('content');
         $item->category_id = \Input::get('category_id');
+        $item->published_at = \Input::get('published_at');
+		$item->is_published = \Input::get('is_published') ? 1 :0;
 		$item->save();
 		$tags = explode(',',\Input::get('tag_list'));
 		$item->tags()->sync($tags);		        
