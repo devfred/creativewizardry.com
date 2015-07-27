@@ -34,7 +34,7 @@
                             @foreach($contentItems as $item)
                             <tr>
                                 <td>
-                                    <form action="{{ URL::to('/admin/' . $item->slug) }}" method="post">
+                                    <form action="{{ URL::to('/admin/content/' . $item->slug) }}" method="post">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="hidden" name="_method" value="DELETE">                                                                       
                                         <input type="submit" class="btn btn-warning" value="Delete">
