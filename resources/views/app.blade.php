@@ -32,7 +32,7 @@
       "url": "http://www.creativewizardry.com",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "http://www.creativewizardry.com/search?q={searchTerms}",
+        "target": "http://www.creativewizardry.com/search/{searchTerms}",
         "query-input": "required name=searchTerms"
       }
     }
