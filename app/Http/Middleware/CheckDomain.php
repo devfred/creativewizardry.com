@@ -18,7 +18,7 @@ class CheckDomain {
 		{
 			\Redirect::to( getenv('SITE_URL') );
 		}
-		
+		dd($request);
 		return $next($request);
 	}
 
