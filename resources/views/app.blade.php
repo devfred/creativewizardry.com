@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>@yield('title', 'Notes/Thoughts/Research') | Creative Wizardry</title>
 	<meta property="og:title" content="@yield('title', 'Notes/Thoughts/Research') | Creative Wizardry" />
-    <meta property="og:site_name" content="http://creativewizardry.com"/>
+    <meta property="og:site_name" content="http://www.creativewizardry.com"/>
     <meta property="og:url" content="{{URL::current()}}"/>
     <meta property="og:description" content="@yield('description', 'Notes/Thoughts/Research | CreativeWizardry')"/>
     <link rel="search" href="{{ asset('opensearchdescription.xml') }}" type="application/opensearchdescription+xml" title="Search Creative Wizardry" />
@@ -23,6 +23,18 @@
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       ga('create', 'UA-10494099-3', 'auto');
       ga('send', 'pageview');
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "url": "http://www.creativewizardry.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "http://www.creativewizardry.com/search?q={searchTerms}",
+        "query-input": "required name=searchTerms"
+      }
+    }
     </script>
     @endif    
 	@yield('header_scripts')
