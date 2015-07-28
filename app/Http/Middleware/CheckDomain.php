@@ -13,12 +13,15 @@ class CheckDomain {
 	 */
 	public function handle($request, Closure $next)
 	{
-		
+		echo ($request->server->get('HTTP_HOST') != getenv('SITE_URL'));
+		echo $request->server->get('HTTP_HOST');
+		echo getenv('SITE_URL');
 		if( $request->server->get('HTTP_HOST') != getenv('SITE_URL') )
 		{
 			\Redirect::to( getenv('SITE_URL') );
 		}
-		dd($request);
+
+		//dd($request);
 		return $next($request);
 	}
 
