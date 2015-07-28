@@ -32,7 +32,7 @@ class CategoriesController extends Controller {
 	{
 		if (!Auth::check())
         {
-            return Redirect::to('/auth/login')->with('message', 'Action requires login');
+            return \Redirect::to('/auth/login')->with('message', 'Action requires login');
         }
         return view('categories.create');
 	}
@@ -75,7 +75,7 @@ class CategoriesController extends Controller {
 	{
 		if (!Auth::check())
         {
-            return Redirect::to('/auth/login')->with('message', 'Action requires login');
+            return \Redirect::to('/auth/login')->with('message', 'Action requires login');
         }
         $item = Category::find($id);     
 		return view('categories.edit', compact('item') );
@@ -91,7 +91,7 @@ class CategoriesController extends Controller {
 	{
 		if (!Auth::check())
         {
-            return Redirect::to('/auth/login')->with('message', 'Action requires login');
+            return \Redirect::to('/auth/login')->with('message', 'Action requires login');
         }
         $item = Category::find($id);
         $item->name = \Input::get('name');	
@@ -110,7 +110,7 @@ class CategoriesController extends Controller {
 	{
 		if (!Auth::check())
         {
-            return Redirect::to('/auth/login')->with('message', 'Action requires login');
+            return \Redirect::to('/auth/login')->with('message', 'Action requires login');
         }
         $item = Category::find($id);
         $item->delete();

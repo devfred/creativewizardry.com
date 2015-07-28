@@ -34,7 +34,7 @@ class TagsController extends Controller {
 	{
 		if (!Auth::check())
         {
-            return Redirect::to('/auth/login')->with('message', 'Action requires login');
+            return \Redirect::to('/auth/login')->with('message', 'Action requires login');
         }
         return view('tags.create');
 	}
@@ -77,7 +77,7 @@ class TagsController extends Controller {
 	{
 		if (!Auth::check())
         {
-            return Redirect::to('/auth/login')->with('message', 'Action requires login');
+            return \Redirect::to('/auth/login')->with('message', 'Action requires login');
         }
         $item = Tag::find($id);     
 		return view('tags.edit', compact('item') );
@@ -112,7 +112,7 @@ class TagsController extends Controller {
 	{
 		if (!Auth::check())
         {
-            return Redirect::to('/auth/login')->with('message', 'Action requires login');
+            return \Redirect::to('/auth/login')->with('message', 'Action requires login');
         }
         $item = Tag::find($id);
         $item->delete();
