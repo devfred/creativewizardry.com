@@ -15,7 +15,7 @@ class CheckDomain {
 	{	
 		if( $request->server->get('HTTP_HOST') != getenv('SITE_URL') )
 		{
-			header('Location: http://'. getenv('SITE_URL') . "/". $request->server->get('REQUEST_URI'), true, 301);
+			header('Location: http://'. getenv('SITE_URL') . $request->server->get('REQUEST_URI'), true, 301);
 		}		
 		return $next($request);
 	}
