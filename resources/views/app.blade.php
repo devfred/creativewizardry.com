@@ -29,6 +29,8 @@
     {
       "@context": "http://schema.org",
       "@type": "WebSite",
+      "name" : "Creative Wizardry",         
+      "alternateName" : "Creative Wizardry",    
       "url": "http://www.creativewizardry.com",
       "potentialAction": {
         "@type": "SearchAction",
