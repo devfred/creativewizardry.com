@@ -56,6 +56,9 @@ h1, h2, .h1, .h2{
   a, a:hover, a:active, a:visited, a:link{text-decoration:none; color:#337AB7; }
 }
 h1, .h1{font-size:62px;text-shadow: 1px 0px 1px #000;}
+#primary-content{
+  h1, .h1{font-size:52px;}
+}
 h2, .h2{font-size:36px;}
 
 @media only screen and (max-width: 768px) {
@@ -64,10 +67,16 @@ h2, .h2{font-size:36px;}
 
 @media only screen and (max-width: 420px) {
   h1, .h1{font-size:58px;}
+  #primary-content{
+    h1, .h1{font-size:48px;}
+  }
   h2, .h2{font-size:22px;}
 }
 @media only screen and (max-width: 320px) {
   h1, .h1{font-size:52px;}
+  #primary-content{
+    h1, .h1{font-size:42px;}
+  }
   h2, .h2{font-size:20px;}
 }
 
