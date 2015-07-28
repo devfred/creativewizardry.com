@@ -25,8 +25,7 @@ class ContentItemRequest extends Request {
             'title' => 'required|min:2',
             'content' => 'required',
             'excerpt' => 'required',
-            'category_id' => 'required|exists:categories,id',            
-            'slug' => 'required|unique:content_items,slug,'.$this->segment(3)
+            'category_id' => 'required|exists:categories,id'
         ];
 	}
 

@@ -15,13 +15,6 @@
 		</div>
 
 		<div class="form-group">
-			<label class="col-md-4 control-label">Slug</label>
-			<div class="col-md-6">
-				<input type="text" class="form-control" name="slug" value="{{ $item->slug }}">
-			</div>
-		</div>
-
-		<div class="form-group">
 			<label class="col-md-4 control-label">Category</label>
 			<div class="col-md-6">
                 <select class="form-control" name="category_id">
