@@ -2,8 +2,21 @@
 
 @section('title'){{$item->title}}@endsection
 @section('description'){{$item->excerpt}}@endsection
-
+@section('header_scripts')
+<script type="application/ld+json">
+{
+  '@context': 'http://schema.org',
+  '@type': 'BlogPosting',
+  'headline': '{{$item->title}}',
+  'alternativeHeadline': '{{$item->title}}',
+  'datePublished': '{{$item->published_at}}',
+  'articleBody': '<p>{!! $item->content !!}</p>'
+}
+</script>
+@endsection
 @section('content')
+    
+
     <div class="article">
 	    <article>
 	    	<div class="article">
