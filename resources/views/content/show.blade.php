@@ -5,12 +5,12 @@
 @section('header_scripts')
 <script type="application/ld+json">
 {
-  '@context': 'http://schema.org',
-  '@type': 'BlogPosting',
-  'headline': '{{$item->title}}',
-  'alternativeHeadline': '{{$item->title}}',
-  'datePublished': '{{$item->published_at}}',
-  'articleBody': '<p>{!! $item->content !!}</p>'
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{$item->title}}",
+  "alternativeHeadline": "{{$item->title}}",
+  "datePublished": "{{$item->published_at}}",
+  "articleBody": "<p>{!! $item->content !!}</p>"
 }
 </script>
 @endsection
