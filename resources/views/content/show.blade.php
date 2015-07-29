@@ -9,8 +9,9 @@
   "@type": "BlogPosting",
   "headline": "{{$item->title}}",
   "alternativeHeadline": "{{$item->title}}",
+  "image": "",
   "datePublished": "{{$item->published_at}}",
-  "articleBody": "<p>{!! $item->content !!}</p>"
+  "articleBody": "{!! $item->content !!}"
 }
 </script>
 @endsection
