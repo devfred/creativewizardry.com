@@ -9,7 +9,7 @@
   "@type": "BlogPosting",
   "headline": "{{$item->title}}",
   "alternativeHeadline": "{{$item->title}}",
-  "image": "",
+  "image": ["https://lh3.googleusercontent.com/-4DIbZbAUR1U/AAAAAAAAAAI/AAAAAAAAANg/3ACRAJK-IBY/s120-c/photo.jpg"],
   "datePublished": "{{$item->published_at}}",
   "articleBody": "{!! $item->content !!}"
 }
