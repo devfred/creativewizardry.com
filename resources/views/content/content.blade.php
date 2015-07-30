@@ -1,6 +1,7 @@
 @extends('app')
 @section('content')
-    @foreach($contentItems as $item)
+    @foreach($contentItems as $item)    
+    @if ( strtotime($item->published_at) <= strtotime('now') )
     <div class="articles">
 	    <article>
 	    	<div class="article">
@@ -18,6 +19,7 @@
 	        </div>
 	    </article>
     </div><!-- end .articles -->
+    @endif
     @endforeach
     {!! $contentItems->render() !!}
 @endsection
