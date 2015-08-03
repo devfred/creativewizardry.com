@@ -120,6 +120,9 @@ body{background:$ltGray;}
 .article .meta{padding:($gutter /2) 0; margin: ($gutter * 0)  0;  /* border-top:1px solid whitesmoke; border-bottom:1px solid whitesmoke; */}
 .article .meta .fa{padding: 0 ($gutter / 4) 0 ($gutter / 2);}
 .article .time{}
+.article{
+  h2, .h2{margin: 15px 0;}
+}
 @media only screen and (max-width: 420px) {
   .article .time{display:block;}
 }
@@ -225,3 +228,5 @@ Follow me on Twitter @maridlcrmn
 }
 
 .highlight{background:whitesmoke;}
+pre[class*=language-]>code[data-language]{overflow:auto;}
+pre[class*=language-]>code[data-language]::before{content:'';}
