@@ -74,7 +74,7 @@
 	</form>
 @endsection
 @section('footer_scripts')
-    <!--script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+    <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
     <script type="text/javascript">
         tinymce.init({
             selector: "textarea[name='excerpt']",
@@ -84,7 +84,7 @@
             selector: "textarea[name='content']",
             plugins: "code"
         });
-    </script-->
+    </script>
     <script>
         var FormTagHelper = (function($){
             var $tags = $('span.form-tag');
