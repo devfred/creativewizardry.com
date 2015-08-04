@@ -60,7 +60,7 @@ class CategoriesController extends Controller {
         $category = Category::findBySlug($slug);
         $contentItems = ContentItem::with('tags', 'category')->whereHas('category', function ($query) use ($slug) {
             $query->whereSlug($slug);
-        })->paginate(5);
+        })->where('is_published', true)->orderBy('published_at', 'DESC')->paginate(5);
         //Session::flash('message', "Category: $category->name");
         return view('content.content', compact('contentItems', 'category'));
     }

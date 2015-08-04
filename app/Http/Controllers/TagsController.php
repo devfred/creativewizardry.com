@@ -62,7 +62,7 @@ class TagsController extends Controller {
         $tag = Tag::findBySlug($slug);
         $contentItems = ContentItem::with('tags', 'category')->whereHas('tags', function ($query) use ($slug) {
             $query->whereSlug($slug);
-        })->paginate(5);
+        })->where('is_published', true)->orderBy('published_at', 'DESC')->paginate(5);
         //Session::flash('message', "Tag: $tag->name");
         return view('content.content', compact('contentItems', 'tag') );
 	}
