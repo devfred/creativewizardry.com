@@ -3,7 +3,7 @@
 @section('content')	
 	<h2 class="page-title">About Me</h2>
 	<p>Hey! I'm Fred King, a full stack web developer in San Jose, CA. I'm currently employed at a development firm in Charlotte, NC. 
-		I specialize in javascript, html, and css on the frontend. As far as backend technologies, I work mostly in .net. 
+		I specialize in Javascript, HTML, and CSS on the frontend. As far as backend technologies, I work mostly in .NET. 
 		I enjoy learning about software design patterns and efficiency tooling.
 	</p>
     <div class="module social">
