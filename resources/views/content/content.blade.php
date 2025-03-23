@@ -1,7 +1,5 @@
 @extends('app')
 @section('content')
-
-
 <div class="bg-white py-24 sm:py-32">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="mx-auto max-w-2xl lg:mx-0">
@@ -24,8 +22,7 @@
               <span class="absolute inset-0"></span>
               <a href="{{ url( '/'. $item->slug ) }}">{!!$item->title!!}</a>
             </a>
-          </h3>
-          
+          </h3>          
           <p class="mt-5 line-clamp-3 text-sm/6 text-gray-600">         
           {!! $item->excerpt !!}
           </p>
@@ -44,6 +41,5 @@
              
     </div>
   </div>
-</div>
-    
+</div>    
 @endsection
