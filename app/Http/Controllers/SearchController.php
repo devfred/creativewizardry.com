@@ -1,14 +1,14 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\ContentItem;
+use App\Models\ContentItem;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
+
 
 class SearchController extends Controller {
 
-    public function search($search)
+    public function search(Request $request, string $search)
     {
         $contentItems = ContentItem
             ::like('content', "$search")
@@ -18,9 +18,9 @@ class SearchController extends Controller {
 
         if($contentItems->count() > 0)
         {
-            Session::flash('message', "Search: $search");
+            $request->session()->flash('message', "Search: $search");            
         }else{
-            Session::flash('message', "No results for $search");
+            $request->session()->flash('message', "No results for $search");            
         }
 
         foreach($contentItems as $item){
