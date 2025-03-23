@@ -1,18 +1,20 @@
-<?php namespace App;
+<?php namespace App\Models;
+
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Tag extends Model {
 
     protected $fillable = ['name', 'slug'];
     public function content_items()
     {
-        return $this->belongsToMany('App\ContentItem');
+        return $this->belongsToMany('App\Models\ContentItem');
     }
     public function setSlugAttribute($data)
     {
-        if (str_slug($data) != '') {
-            $this->attributes['slug'] = str_slug($data);
+        if (Str::slug($data) != '') {
+            $this->attributes['slug'] = Str::slug($data);
         } else {
             $this->attributes['slug'] = $data;
         }
