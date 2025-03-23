@@ -1,62 +1,52 @@
 <?php
 
-use App\ContentItem;
-use App\User;
-use App\Tag;
-use App\Category;
+namespace Database\Seeders;
+
+use App\Models\ContentItem;
+use App\Models\User;
+use App\Models\Tag;
+use App\Models\Category;
+use Faker\Factory;
+use Illuminate\Support\Facades\Hash;
+
+use DB;
+
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Model;
 
-
-class DatabaseSeeder extends Seeder {
-
-	/**
-	 * Run the database seeds.
-	 *
-	 * @return void
-	 */
-	public function run()
-	{
-		Model::unguard();
-        $this->call('UserTableSeeder');
-        $this->call('CategoryTableSeeder');
-        if(getenv('APP_ENV') != "production")
-        {
-            $this->call('TagTableSeeder');
-            $this->call('ContentTableSeeder');
-        }
-        
-	}
-
-}
-
-class UserTableSeeder extends Seeder {
-
-    public function run()
-    {
-        DB::table('users')->delete();
-        User::create(['email' => env('ADMIN_EMAIL'), 'name'=>env('ADMIN_NAME'), 'password'=>Hash::make(env('ADMIN_PASS'))]);
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Seed the application's database.
+     */
+    public function run(): void
+    {        
+        $this->create_users();
+        $this->create_categories();
+        $this->create_tags();
+        $this->create_content_items();        
     }
 
-}
-class CategoryTableSeeder extends Seeder
-{
-    public function run()
+    private function create_users()
     {
-        DB::table('categories')->delete();
+        // User::factory(10)->create(); 
+        User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+        ]);
+    }
+
+    private function create_categories()
+    {
         Category::create(['name' => "Uncategorized", 'slug'=>'uncategorized']);
         Category::create(['name' => "Thoughts", 'slug'=>'thoughts']);
         Category::create(['name' => "Notes", 'slug'=>'notes']);
         Category::create(['name' => "Research", 'slug'=>'research']);
         Category::create(['name' => "Quick Tips", 'slug'=>'quick-tips']);
     }
-}
-class TagTableSeeder extends Seeder
-{
-    public function run()
+
+    private function create_tags()
     {
-        DB::table('tags')->delete();
-        DB::table('content_item_tag')->delete();
         Tag::create(['name' => "Javascript", 'slug'=>'javascript']);
         Tag::create(['name' => "HTML", 'slug'=>'html']);
         Tag::create(['name' => "CSS", 'slug'=>'css']);
@@ -66,32 +56,27 @@ class TagTableSeeder extends Seeder
         Tag::create(['name' => "MSBuild", 'slug'=>'msbuild']);
         Tag::create(['name' => "PHP", 'slug'=>'php']);
     }
-}
 
-class ContentTableSeeder extends Seeder
-{
-    public function run()
-    {        
-        DB::table('content_items')->delete();
-        $faker = Faker\Factory::create();        
-        $user = User::create(['email' => $faker->email, 'name'=>$faker->word, 'password'=>Hash::make('admin')]);
+    private function create_content_items()
+    {                   
+        $user = User::create(['email' => fake()->email, 'name'=>fake()->word, 'password'=>Hash::make('admin')]);
 
         $tagCount = Tag::count();
         $catCount = Category::count();
 
         for ($i = 0; $i < 30; $i++)
         {
-            $title = $faker->sentence;
+            $title = fake()->sentence;
             $slug = strtolower( str_replace(".", "", str_replace(" ", "-", $title) ) );
             $item = ContentItem::create([
                 'title' => $title, 
                 'slug'=>$slug,
-                'excerpt'=>join('<br/><br/>',$faker->paragraphs(2)), 
-                'content'=>join( '<br/><br/>', $faker->paragraphs(5) ), 
+                'excerpt'=>join(fake()->paragraphs(2)), 
+                'content'=>join(fake()->paragraphs(5) ), 
                 'user_id'=>$user->id, 
                 'category_id'=>rand(1,$catCount),
                 'is_published' => rand(0,1),
-                'published_at' => $faker->dateTime($max = '2015-08-15 00:00:00')  
+                'published_at' => fake()->dateTime($max = '2015-08-15 00:00:00')  
             ]);
             $content_tags = array(
                 array('content_item_id' => $item->id, 'tag_id'=>rand(1,$tagCount)),
@@ -100,7 +85,5 @@ class ContentTableSeeder extends Seeder
             );
             DB::table('content_item_tag')->insert($content_tags);
         }
-
     }
-
 }
