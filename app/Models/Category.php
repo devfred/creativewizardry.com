@@ -1,17 +1,19 @@
-<?php namespace App;
+<?php namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+
 
 class Category extends Model {
 
     protected $fillable = ['name', 'slug', 'parent_id'];
     public function content_items()
     {
-        return $this->hasMany('App\ContentItem');
+        return $this->hasMany('App\Models\ContentItem');
     }
     public function setSlugAttribute($data)
     {
-        $this->attributes['slug'] = str_slug($data);
+        $this->attributes['slug'] = Str::slug($data);
     }
     public function scopeGetTopLevel($query)
     {
