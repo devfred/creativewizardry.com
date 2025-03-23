@@ -46,15 +46,22 @@ class DatabaseSeeder extends Seeder
     }
 
     private function create_tags()
-    {
-        Tag::create(['name' => "Javascript", 'slug'=>'javascript']);
+    {                
         Tag::create(['name' => "HTML", 'slug'=>'html']);
         Tag::create(['name' => "CSS", 'slug'=>'css']);
-        Tag::create(['name' => "CSharp", 'slug'=>'csharp']);
-        Tag::create(['name' => "DotNet", 'slug'=>'dotnet']);
-        Tag::create(['name' => "Powershell", 'slug'=>'powershell']);
-        Tag::create(['name' => "MSBuild", 'slug'=>'msbuild']);
-        Tag::create(['name' => "PHP", 'slug'=>'php']);
+        Tag::create(['name' => "JavaScript", 'slug'=>'javascript']);
+        Tag::create(['name' => "NodeJS", 'slug'=>'node']);
+        Tag::create(['name' => "C#", 'slug'=>'csharp']);
+        Tag::create(['name' => ".Net", 'slug'=>'dotnet']);                
+        Tag::create(['name' => "Git", 'slug'=>'git']);
+        Tag::create(['name' => "GitLab", 'slug'=>'gitlab']);
+        Tag::create(['name' => "Kubernetes", 'slug'=>'k8s']);
+        Tag::create(['name' => "DotNetNuke", 'slug'=>'dnn']);
+        Tag::create(['name' => "Laravel", 'slug'=>'laravel']);
+        Tag::create(['name' => "Homelab", 'slug'=>'homelab']);
+        Tag::create(['name' => "CI/CD", 'slug'=>'ci-cd']);
+        Tag::create(['name' => "DevOps", 'slug'=>'devops']);
+        Tag::create(['name' => "AI", 'slug'=>'ai']);
     }
 
     private function create_content_items()
@@ -78,11 +85,26 @@ class DatabaseSeeder extends Seeder
                 'is_published' => rand(0,1),
                 'published_at' => fake()->dateTime($max = '2015-08-15 00:00:00')  
             ]);
-            $content_tags = array(
-                array('content_item_id' => $item->id, 'tag_id'=>rand(1,$tagCount)),
-                array('content_item_id' => $item->id, 'tag_id'=>rand(1,$tagCount)),
-                array('content_item_id' => $item->id, 'tag_id'=>rand(1,$tagCount))
-            );
+
+            // Maintain an array of assigned tags for the current item
+            $assignedTags = [];
+
+            // Generate unique tags until we have three
+            while (count($assignedTags) < 3) {
+                $tagId = rand(1, $tagCount);
+                if (!in_array($tagId, $assignedTags)) {
+                    $assignedTags[] = $tagId;
+                }
+            }
+
+            // Create content_tag records
+            $content_tags = array_map(function ($tagId) use ($item) {
+                return [
+                    'content_item_id' => $item->id,
+                    'tag_id' => $tagId,
+                ];
+            }, $assignedTags);
+            
             DB::table('content_item_tag')->insert($content_tags);
         }
     }
