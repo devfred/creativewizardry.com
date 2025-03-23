@@ -41,5 +41,9 @@ class ContentController extends Controller
         return view('content.content', compact('contentItems', 'category'));
 	}
 
+	public function get_static_content(string $viewName): view
+	{
+		return view("content.$viewName");
+	}
 
 }
