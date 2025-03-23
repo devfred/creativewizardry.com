@@ -1,7 +1,10 @@
-<?php namespace App;
+<?php 
+
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\User;
+use App\Models\User;
+use Illuminate\Support\Str;
 
 class ContentItem extends Model {
 
@@ -34,16 +37,16 @@ class ContentItem extends Model {
      */
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Models\User');
     }
 
     public function tags()
     {
-        return $this->belongsToMany('App\Tag');
+        return $this->belongsToMany('App\Models\Tag');
     }
     public function category()
     {
-        return $this->belongsTo('App\Category');
+        return $this->belongsTo('App\Models\Category');
     }
     public function getTagListAttribute()
     {
@@ -60,7 +63,7 @@ class ContentItem extends Model {
     }
     public function setSlugAttribute($data)
     {
-        $this->attributes['slug'] = str_slug($data);
+        $this->attributes['slug'] = Str::slug($data);
     }
     public function scopeFindBySlug($query, $slug)
     {
